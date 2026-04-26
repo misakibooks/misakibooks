@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contents — misaki.books</title>
+  <style>
+    :root {
+      --blue: #2A17FF;
+      --white: #ffffff;
+      --sidebar-width: 104px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: var(--white);
+      color: var(--blue);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 50;
+      width: var(--sidebar-width);
+      height: 100vh;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .side-logo {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 13px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.08em;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a { opacity: 0.72; transition: opacity 0.2s; }
+    .nav a:hover { opacity: 1; }
+    .nav a.active { opacity: 1; }
+
+    main {
+      padding: 96px 8vw 120px calc(var(--sidebar-width) + 8vw);
+      min-height: 100vh;
+    }
+
+    .page-header {
+      margin-bottom: 80px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(42,23,255,0.15);
+    }
+
+    .page-title {
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.02em;
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    /* ── カードを縦積みで横長に ── */
+    .contents-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .content-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 64px;
+      padding: 48px 52px;
+      background: rgba(42,23,255,0.05);
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .content-card:hover {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .card-label {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      opacity: 0.42;
+      width: 120px;
+    }
+
+    .card-body {
+      flex: 1;
+    }
+
+    .card-title {
+      font-size: clamp(20px, 2.2vw, 28px);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      opacity: 0.65;
+      margin: 0;
+    }
+
+    @media (max-width: 900px) {
+      :root { --sidebar-width: 72px; }
+      .sidebar { width: var(--sidebar-width); padding: 22px 18px; }
+      .nav { gap: 14px; font-size: 10px; }
+      main { padding: 72px 28px 80px calc(var(--sidebar-width) + 28px); }
+      .content-card { flex-direction: column; align-items: flex-start; gap: 16px; padding: 36px 28px; }
+      .card-label { width: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" aria-label="site navigation">
+    <a class="side-logo" href="index.html">misaki.books</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="contents.html" class="active">Contents</a>
+      <a href="https://misakibooks.theshop.jp/" target="_blank" rel="noopener">Shop</a>
+      <a href="about.html">About</a>
+    </nav>
+  </aside>
+
+  <main>
+    <header class="page-header">
+      <h1 class="page-title">Contents</h1>
+    </header>
+
+    <div class="contents-list">
+
+      <div class="content-card">
+        <p class="card-label">Theme Song</p>
+        <div class="card-body">
+          <h2 class="card-title">テーマソング</h2>
+          <p class="card-desc">ある本とある音楽のストーリーリミックスの実験（準備中）</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+</body>
+</html>
