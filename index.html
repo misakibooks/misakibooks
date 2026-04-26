@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>misaki.books</title>
+  <style>
+    :root {
+      --blue: #2A17FF;
+      --black: #0b0b0b;
+      --white: #ffffff;
+      --sidebar-width: 104px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+      background: var(--blue);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 50;
+      width: var(--sidebar-width);
+      height: 100vh;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .side-logo {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      font-size: 13px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.08em;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a { opacity: 0.72; transition: opacity 0.2s; }
+    .nav a:hover { opacity: 1; }
+
+    main { width: 100%; }
+
+    .hero {
+      min-height: 100vh;
+      padding: 72px 8vw 72px calc(var(--sidebar-width) + 8vw);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 120px;
+      background: var(--blue);
+    }
+
+    /* ── Animated Bar Logo ── */
+    .logo-mark-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .logo-mark {
+      width: min(330px, 70vw);
+      height: 360px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .bar {
+      width: 42px;
+      background: var(--white);
+      border-radius: 2px;
+      transform-origin: bottom center;
+    }
+
+    .bar:nth-child(1) { animation: b1 3.8s ease-in-out infinite; }
+    .bar:nth-child(2) { animation: b2 4.2s ease-in-out infinite 0.3s; }
+    .bar:nth-child(3) { animation: b3 3.5s ease-in-out infinite 0.9s; }
+    .bar:nth-child(4) { animation: b4 4.6s ease-in-out infinite 0.5s; }
+    .bar:nth-child(5) { animation: b5 3.9s ease-in-out infinite 1.2s; }
+    .bar:nth-child(6) { animation: b6 4.1s ease-in-out infinite 0.7s; }
+
+    @keyframes b1 {
+      0%,100% { height: 214px; opacity: 1; }
+      45%      { height: 270px; opacity: 0.8; }
+    }
+    @keyframes b2 {
+      0%,100% { height: 286px; opacity: 1; }
+      40%      { height: 218px; opacity: 0.72; }
+      70%      { height: 316px; opacity: 0.9; }
+    }
+    @keyframes b3 {
+      0%,100% { height: 184px; opacity: 1; }
+      50%      { height: 244px; opacity: 0.85; }
+    }
+    @keyframes b4 {
+      0%,100% { height: 184px; opacity: 1; }
+      35%      { height: 138px; opacity: 0.68; }
+      65%      { height: 208px; opacity: 0.9; }
+    }
+    @keyframes b5 {
+      0%,100% { height: 340px; opacity: 1; }
+      50%      { height: 288px; opacity: 0.78; }
+    }
+    @keyframes b6 {
+      0%,100% { height: 188px; opacity: 1; }
+      40%      { height: 248px; opacity: 0.82; }
+      78%      { height: 162px; opacity: 0.7; }
+    }
+
+    .brand-name {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .statement-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .statement {
+      margin: 0;
+      font-size: clamp(16px, 1.6vw, 24px);
+      font-weight: 700;
+      line-height: 2.85;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+
+    .news {
+      min-height: 46vh;
+      padding: 88px 8vw 104px calc(var(--sidebar-width) + 8vw);
+      background: var(--white);
+      color: var(--black);
+    }
+
+    .news h2 {
+      margin: 0 0 42px;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .news-list {
+      max-width: 860px;
+      display: flex;
+      flex-direction: column;
+      border-top: 1px solid rgba(0,0,0,0.18);
+    }
+
+    .news-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 32px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.18);
+      font-size: 15px;
+      line-height: 1.7;
+      transition: opacity 0.2s;
+    }
+
+    .news-item:hover { opacity: 0.55; }
+
+    .news-date {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      opacity: 0.55;
+    }
+
+    .news-title { font-weight: 600; }
+
+    @media (max-width: 900px) {
+      :root { --sidebar-width: 72px; }
+      .sidebar { width: var(--sidebar-width); padding: 22px 18px; }
+      .nav { gap: 14px; font-size: 10px; }
+      .hero { min-height: auto; padding: 72px 28px 88px calc(var(--sidebar-width) + 28px); gap: 56px; }
+      .logo-mark { height: 260px; gap: 18px; }
+      .bar { width: 30px; }
+      .bar:nth-child(1) { animation: b1sp 3.8s ease-in-out infinite; }
+      .bar:nth-child(2) { animation: b2sp 4.2s ease-in-out infinite 0.3s; }
+      .bar:nth-child(3) { animation: b3sp 3.5s ease-in-out infinite 0.9s; }
+      .bar:nth-child(4) { animation: b4sp 4.6s ease-in-out infinite 0.5s; }
+      .bar:nth-child(5) { animation: b5sp 3.9s ease-in-out infinite 1.2s; }
+      .bar:nth-child(6) { animation: b6sp 4.1s ease-in-out infinite 0.7s; }
+      @keyframes b1sp { 0%,100%{height:156px;opacity:1} 45%{height:196px;opacity:0.8} }
+      @keyframes b2sp { 0%,100%{height:210px;opacity:1} 40%{height:160px;opacity:0.72} 70%{height:228px;opacity:0.9} }
+      @keyframes b3sp { 0%,100%{height:136px;opacity:1} 50%{height:176px;opacity:0.85} }
+      @keyframes b4sp { 0%,100%{height:136px;opacity:1} 35%{height:104px;opacity:0.68} 65%{height:156px;opacity:0.9} }
+      @keyframes b5sp { 0%,100%{height:250px;opacity:1} 50%{height:210px;opacity:0.78} }
+      @keyframes b6sp { 0%,100%{height:138px;opacity:1} 40%{height:178px;opacity:0.82} 78%{height:118px;opacity:0.7} }
+      .statement { font-size: 19px; line-height: 2; }
+      .news { padding: 72px 28px 80px calc(var(--sidebar-width) + 28px); }
+      .news-item { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar" aria-label="site navigation">
+    <a class="side-logo" href="#top">misaki.books</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="contents.html">Contents</a>
+      <a href="https://misakibooks.theshop.jp/" target="_blank" rel="noopener">Shop</a>
+      <a href="about.html">About</a>
+    </nav>
+  </aside>
+
+  <main id="top">
+    <section class="hero" aria-label="misaki.books statement">
+
+      <div class="logo-mark-wrap" aria-label="misaki.books logo">
+        <div class="logo-mark" aria-hidden="true">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <div class="brand-name">misaki.books</div>
+      </div>
+
+      <div class="statement-wrap">
+        <p class="statement">
+          この出版不況──20年余りで書店数はおよそ2万店から1万店へ半減。<br />
+          ひと月に一度も本を読まない人口割合は、約6割。<br />
+          本が売れない。みんな読まない。<br />
+          なぜ働いていると本が読めなくなるのか。<br />
+          文学に関して、作者がAIに取って代わられることばかり心配して、<br />
+          読者がAIに取って代わられることを懸念しないのか？<br />
+          「読書」という体験があらゆる方向から少しずつ奪われていくこんな時代に、<br />
+          本屋を始めました。<br />
+          表紙をめくれば、そこに世界はある。<br />
+          これまで生身で得てきた経験や知識があるからこそ、<br />
+          読み解かれ、立ち上がる世界。<br />
+          同じ本でも読み手によってその世界は違う。<br />
+          たくさんの世界に入り浸ることで<br />
+          ようやく、この時代を均衡に見ることができる。<br />
+          今、読もう。<br />
+          今こそ、読もう。<br />
+          misaki.booksは、海に聳える岬のように<br />
+          広い視野からあなたに世界の扉をひらく本屋です。
+        </p>
+      </div>
+
+    </section>
+
+    <section class="news" aria-label="News">
+      <h2>News</h2>
+      <div class="news-list">
+        <a class="news-item" href="theme_song.html">
+          <span class="news-date">2026.04.26</span>
+          <span class="news-title">Contents「Theme Song」を公開しました</span>
+        </a>
+        <a class="news-item" href="https://misakibooks.theshop.jp/" target="_blank" rel="noopener">
+          <span class="news-date">2026.04.24</span>
+          <span class="news-title">Shopを公開しました</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
